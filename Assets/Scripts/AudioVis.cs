@@ -9,7 +9,7 @@ class MicAudioSource : MonoBehaviour
     private AudioSource m_MicAudioSource;
 
     [SerializeField] private LineRenderer m_LineRenderer;
-    private readonly Vector3[] m_Positions = new Vector3[1024];
+    private readonly Vector3[] m_Positions = new Vector3[RESOLUTION * 2];
     [SerializeField, Range(1, 300)] private float m_AmpGain = 300;
 
     private void Awake()
@@ -33,11 +33,17 @@ class MicAudioSource : MonoBehaviour
         Debug.Log($"=== Device Set: {targetDevice} ===");
         MicStart(targetDevice);
 
-        // LineRenderer初期化
+        m_LineRenderer.positionCount = RESOLUTION * 2;
+
+        // LineRenderer初期化（上側）
         for (int i = 0; i < RESOLUTION; i++)
         {
             var x = 10 * (i / 512f - 1);
             m_Positions[i] = new Vector3(x, 0, 0);
+
+            // 下側は逆順で配置してミラーにする
+            int mirroredIndex = RESOLUTION * 2 - 1 - i;
+            m_Positions[mirroredIndex] = new Vector3(x, 0, 0);
         }
 
         m_LineRenderer.SetPositions(m_Positions);
@@ -59,7 +65,11 @@ class MicAudioSource : MonoBehaviour
 
         for (int i = 0; i < RESOLUTION; i++)
         {
-            m_Positions[i].y = spectrum[i] * m_AmpGain;
+            float y = spectrum[i] * m_AmpGain;
+            m_Positions[i].y = y;
+
+            int mirroredIndex = RESOLUTION * 2 - 1 - i;
+            m_Positions[mirroredIndex].y = -y;
         }
 
         m_LineRenderer.SetPositions(m_Positions);
@@ -72,7 +82,7 @@ class MicAudioSource : MonoBehaviour
         m_MicAudioSource.clip = Microphone.Start(device, true, 1, SAMPLE_RATE);
 
         //マイクデバイスの準備ができるまで待つ
-        while (Microphone.GetPosition("") <= 0) { }
+        while (Microphone.GetPosition(device) <= 0) { }
 
         m_MicAudioSource.Play();
     }
