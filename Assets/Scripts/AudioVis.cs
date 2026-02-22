@@ -65,7 +65,12 @@ class MicAudioSource : MonoBehaviour
 
         for (int i = 0; i < RESOLUTION; i++)
         {
-            float y = spectrum[i] * m_AmpGain;
+            float y = 0f;
+            if (i >= 2 && i < RESOLUTION - 2)
+            {
+                float linear = spectrum[i] * m_AmpGain;
+                y = Mathf.Log(1f + linear * 10f) * 1f;
+            }
             m_Positions[i].y = y;
 
             int mirroredIndex = RESOLUTION * 2 - 1 - i;

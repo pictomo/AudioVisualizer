@@ -1320,11 +1320,11 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5882353, g: 0, b: 0, a: 1}
-      key1: {r: 0, g: 0, b: 0.5882353, a: 1}
-      key2: {r: 0.5882353, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0.5882353, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+      key2: {r: 1, g: 1, b: 1, a: 0}
+      key3: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
+      key4: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
@@ -1332,7 +1332,7 @@ LineRenderer:
       ctime1: 32702
       ctime2: 32768
       ctime3: 65535
-      ctime4: 0
+      ctime4: 65535
       ctime5: 0
       ctime6: 0
       ctime7: 0
@@ -1494,7 +1494,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3a668ef1c7a484dbd8c3bdbf93762150, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e11d57c0a8c1540d78cfc717cf800cd9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
